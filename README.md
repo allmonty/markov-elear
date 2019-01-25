@@ -2,6 +2,8 @@
 
 A Clojure library designed to ... well, that part is up to you.
 
+This project was done based on a tutorial for [building a Twitter Bot with Clojure](http://howistart.org/posts/clojure/1/index.html)
+
 ## Usage
 
 FIXME
