@@ -1,4 +1,14 @@
-(ns markov-elear.generator (:require [clojure.set]))
+(ns markov-elear.generator
+  (:require [clojure.set]
+            [twitter.api.restful :as twitter]
+            [twitter.oauth :as twitter-oauth]
+            [environ.core :refer [env]]
+            ))
+
+(def my-creds (twitter-oauth/make-oauth-creds (env :app-consumer-key)
+                                              (env :app-consumer-secret)
+                                              (env :user-access-token)
+                                              (env :user-access-secret)))
 
 (def example "And the Golden Grouse And the Pobble who")
 
@@ -75,6 +85,15 @@
 (defn tweet-text []
   (let [text (generate-text (-> prefix-list shuffle first) functional-leary)]
     (end-at-last-punctuation text)))
+
+(defn status-update []
+  (let [tweet (tweet-text)]
+    (println "generated tweet is :" tweet)
+    (println "char count is:" (count tweet))
+    (when (not-empty tweet)
+      (try (twitter/statuses-update :oauth-creds my-creds
+                                    :params {:status tweet})
+           (catch Exception e (println "Oh no! " (.getMessage e)))))))
 
 (defn -main [& args]
   (println "Started up"))
