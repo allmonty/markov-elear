@@ -50,5 +50,31 @@
 
 (def functional-leary (apply merge-with clojure.set/union (map process-file files)))
 
+(def prefix-list ["On the" "They went" "And all" "We think"
+                  "For every" "No other" "To a" "And every"
+                  "We, too," "For his" "And the" "But the"
+                  "Are the" "The Pobble" "For the" "When we"
+                  "In the" "Yet we" "With only" "Are the"
+                  "Though the"  "And when"
+                  "We sit" "And this" "No other" "With a"
+                  "And at" "What a" "Of the"
+                  "O please" "So that" "And all" "When they"
+                  "But before" "Whoso had" "And nobody" "And it's"
+                  "For any" "For example," "Also in" "In contrast"
+                  "in there," "you want", "I say", "you want"])
+
+(defn end-at-last-punctuation [text]
+  (let [trimmed-to-last-punct (apply str (re-seq #"[\s\w]+[^.!?,]*[.!?,]" text))
+        trimmed-to-last-word (apply str (re-seq #".*[^a-zA-Z]+" text))
+        result-text (if (empty? trimmed-to-last-punct)
+                      trimmed-to-last-word
+                      trimmed-to-last-punct)
+        cleaned-text (clojure.string/replace result-text #"[,| ]$" ".")]
+    (clojure.string/replace cleaned-text #"\"" "'")))
+
+(defn tweet-text []
+  (let [text (generate-text (-> prefix-list shuffle first) functional-leary)]
+    (end-at-last-punctuation text)))
+
 (defn -main [& args]
   (println "Started up"))
