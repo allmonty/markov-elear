@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.9.0"]]
   :repl-options {:init-ns markov-elear.generator}
   :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.7.0"]]}}
+  :main markov-elear.generator
   )

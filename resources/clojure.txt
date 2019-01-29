@@ -1,0 +1,5 @@
+Clojure is a modern, dynamic, and functional dialect of the Lisp programming language on the Java platform. Like other Lisps, Clojure treats code as data and has a Lisp macro system. The current development process is community-driven, overseen by Rich Hickey as its benevolent dictator for life (BDFL).
+
+Clojure encourages immutability and immutable data structures. While its type system is entirely dynamic, recent efforts have also sought the implementation of gradual typing. Clojure encourages programmers to be explicit about managing state and identity.[13] This focus on programming with immutable values and explicit progression-of-time constructs is intended to facilitate developing more robust programs, especially multithreaded ones.
+
+Clojure is used in industry by firms such as Funding Circle, Walmart, Puppet, Apple, and other large software firms. Commercial support for Clojure is provided by Cognitect. Annual Clojure conferences are organised every year across the globe, the most famous of them being Clojure/conj (US east coast), Clojure/West (US west coast), and EuroClojure (Europe).
