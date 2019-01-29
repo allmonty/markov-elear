@@ -1,5 +1,6 @@
 (ns markov-elear.generator
   (:require [clojure.set]
+            [overtone.at-at :as overtone]
             [twitter.api.restful :as twitter]
             [twitter.oauth :as twitter-oauth]
             [environ.core :refer [env]]
@@ -95,5 +96,10 @@
                                     :params {:status tweet})
            (catch Exception e (println "Oh no! " (.getMessage e)))))))
 
+(def my-pool (overtone/mk-pool))
+
 (defn -main [& args]
-  (println "Started up"))
+  (println "Started up")
+  (println (tweet-text))
+  ;; every 4 hours
+  (overtone/every (* 1000 60 60 4) #(println (status-update)) my-pool))
